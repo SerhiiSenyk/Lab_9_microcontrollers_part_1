@@ -14,6 +14,7 @@
 
 //#define F_CPU 16000000UL
 #define F_CPU 1843200UL
+//#define F_CPU 7372800UL
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -28,10 +29,10 @@
 #define BUF_MASK_RX (BUF_SIZE_RX - 1)
 #define BUF_MASK_TX (BUF_SIZE_TX - 1)
 
-#define ADDRESS_SLAVE_1 '1'
-#define ADDRESS_SLAVE_2 '2'
-#define COMMAND_WRITE 'w'//0xA1
-#define COMMAND_READ  'r'//0xB1
+#define ADDRESS_SLAVE_1 43
+#define ADDRESS_SLAVE_2 45
+#define COMMAND_WRITE 0xA1
+#define COMMAND_READ  0xB1
 #define EN_m PD1
 volatile int8_t bufRXfromPC[BUF_SIZE_RX];
 volatile int8_t bufTXfromPC[BUF_SIZE_TX];

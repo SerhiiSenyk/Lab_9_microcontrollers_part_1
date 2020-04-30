@@ -1,7 +1,7 @@
-/*/*
- * Lab_9_ATmega328P.c
+/*
+ * Lab_9_ATmega328p_slave2.c
  *
- * Created: 28.04.2020 15:37:18
+ * Created: 29.04.2020 23:35:17
  * Author : Serhii-PC
  */ 
 
@@ -19,7 +19,7 @@
 #define BUF_MASK_RX (BUF_SIZE_RX - 1)
 #define BUF_MASK_TX (BUF_SIZE_TX - 1)
 
-#define ADDRESS 0x43
+#define ADDRESS 0x45	
 #define COMMAND_WRITE 0xA1
 #define COMMAND_READ  0xB1
 #define ENABLE PORTD2
@@ -59,7 +59,7 @@ ISR(USART_UDRE_vect)
 	UDR0 = bufTX[txOut++];
 	txOut &= BUF_MASK_TX;
 	if(txOut == txIn)
-		UCSR0B &= ~(1 << UDRIE0);
+	UCSR0B &= ~(1 << UDRIE0);
 }
 
 ISR(USART_TX_vect)
@@ -69,15 +69,15 @@ ISR(USART_TX_vect)
 
 int main(void)
 {
-    Setup();
+	Setup();
 	_delay_ms(500);
 	sei();
 	uint8_t byteFromMaster = 0;
 	flag = 1;
 	uint8_t command = 0;
-	const char string[30] = "Senyk Serhii Bogdanovich";
-    while (1) //36:14
-    {
+	const char string[30] = "18.09.1998";
+	while (1) //36:14
+	{
 		if(rxOut != rxIn)
 		{
 			byteFromMaster = readBufRX();
@@ -100,7 +100,7 @@ int main(void)
 				flag = 1;
 				if(command == COMMAND_WRITE){
 					flag = 1;
-					//PORTB = byteFromMaster;	
+					//PORTB = byteFromMaster;
 					//setWriteModeRS485();
 					//writeBufTX(byteFromMaster);
 				}
@@ -115,7 +115,7 @@ uint8_t readBufRX(void)
 {
 	uint8_t value = bufRX[rxOut++];
 	rxOut &= BUF_MASK_RX;
-	return value;	
+	return value;
 }
 
 void writeBufTX(uint8_t value)
@@ -143,3 +143,5 @@ void print(char *str)
 		++i;
 	}
 }
+
+

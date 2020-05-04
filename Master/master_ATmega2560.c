@@ -29,8 +29,6 @@
 #define BUF_MASK_RX (BUF_SIZE_RX - 1)
 #define BUF_MASK_TX (BUF_SIZE_TX - 1)
 
-#define ADDRESS_SLAVE_1 43
-#define ADDRESS_SLAVE_2 45
 #define COMMAND_WRITE 0xA1
 #define COMMAND_READ  0xB1
 #define EN_m PD1
